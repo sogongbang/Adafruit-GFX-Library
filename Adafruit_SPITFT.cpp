@@ -1016,7 +1016,7 @@ void Adafruit_SPITFT::writePixels(uint16_t *colors, uint32_t len, bool block,
   if (!bigEndian) {
     swapBytes(colors, len); // convert little-to-big endian for display
   }
-  hwspi._spi->transfer(colors, NULL, 2 * len); // NULL RX to avoid overwrite
+  ((UbiSPI *) hwspi._spi)->transfer(colors, NULL, 2 * len); // NULL RX to avoid overwrite
   if (!bigEndian) {
     swapBytes(colors, len); // big-to-little endian to restore pixel buffer
   }
